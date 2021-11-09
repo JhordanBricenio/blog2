@@ -15,3 +15,4 @@ Route::resource('tags', TagController::class)->names('admin.tags');
 
 Route::resource('posts', PostController::class)->names('admin.posts');
 
+
