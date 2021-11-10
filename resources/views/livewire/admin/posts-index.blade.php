@@ -1,4 +1,8 @@
 <div class="card">
+    <div class="card-header">
+        <input wire:model="search" class="form-control" placeholder="Ingrese el nombre de un Post">
+    </div>
+    @if ($posts->count())
     <div class="card-body">
         <table class="table table-striped">
             <thead>
@@ -34,5 +38,15 @@
         </table>
 
     </div>
+    <div class="card-footer">
+       {{--  Incluir paginacion desde el componenete de livewire --}}
+       {{--  {{$posts->links()}} --}}
+    </div>
+        
+    @else
+       <div class="card-body">
+            <strong>No hay ninún registro</strong>
+       </div>
+    @endif
     
 </div>

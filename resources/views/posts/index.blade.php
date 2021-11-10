@@ -4,7 +4,7 @@
             @foreach ($posts as $post)
             {{-- Usamos directiva de blade para saber si estamos en la primer iteracion 
             y hacer una imagen mas grande ne la vista --}}
-                <article class="w-full h-80 bg-cover bg-center @if($loop->first) md:col-span-2 @endif "style="background-image: url({{Storage::url($post->image->url)}})">
+                <article class="w-full h-80 bg-cover bg-center @if($loop->first) md:col-span-2 @endif "style="background-image: url(@if($post->image){{Storage::url($post->image->url)}} @else https://cdn.pixabay.com/photo/2020/04/13/20/48/dog-5040008_960_720.jpg @endif)">
                     <div class="w-full h-full px-8 flex flex-col justify-center">
                         <div>
                             @foreach ($post->tags as $tagg)

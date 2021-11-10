@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    
     use HasFactory;
+
+/*     Asignacion masiva con esta variable colocamos los campos que no querermos que se asignen */
+    protected $guarded=['id','created_at','updated-at'];
 
     //Relacion uno a muchos inversa
     //Relacion con User

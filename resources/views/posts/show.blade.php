@@ -5,16 +5,16 @@
             {{$post->name}}
         </h1>
         <div class="text-lg text-gray-500 mb-2">
-            {{$post->extract}}
+            {!!$post->extract!!}
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {{-- contenido principal --}}
             <div class="lg:col-span-2">
                 <figure>
-                    <img class="w-full h-80  object-cover object-center" src="{{Storage::url($post->image->url)}}" alt="">
+                    <img class="w-full h-80  object-cover object-center" src="@if($post->image){{Storage::url($post->image->url)}} @else https://cdn.pixabay.com/photo/2020/04/13/20/48/dog-5040008_960_720.jpg @endif" alt="">
                 </figure>
                 <div class="text-base text-gray-500 mt-4">
-                    {{$post->body}}
+                    {!!$post->body!!}
                 </div>
 
             </div>

@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
+use App\Models\Tag;
 
+use App\Http\Requests\StorePostRequest;
 class PostController extends Controller
 {
     /**
@@ -25,7 +28,16 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+       /*  Obteniendo el formato para pasarle a laravel colective obteniendo el nombre y como llave pasarle el id */
+        $categories=Category::pluck('name','id');
+        $tags=Tag::all();
+
+        /* Prbando los objetos que retornan d ela base de datos
+        return $categories; */
+
+
+
+        return view('admin.posts.create',compact('categories','tags'));
     }
 
     /**
@@ -34,9 +46,15 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
+        //Validando las reglas de validacion
+        $post=Post::create($request->all());
+        if($request->tags){
+            $post->tags()->attach($request->tags);
+
+        }
+        return redirect()->route('admin.posts.edit',$post);
     }
 
     /**

@@ -17,8 +17,8 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->text('extract');
-            $table->longText('body');//cuerpo del blog 
+            $table->text('extract')->nullable();//Para poder hace dos validaciones al crar un nuevo post
+            $table->longText('body')->nullable();//cuerpo del blog 
             $table->enum('status',[1,2])->default(1);//Estado del post 1 borrador 2:-publicado
             $table->unsignedBigInteger('user_id');//Campos para las relaciones
             $table->unsignedBigInteger('category_id');
