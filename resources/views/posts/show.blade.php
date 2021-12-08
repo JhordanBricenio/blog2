@@ -11,7 +11,11 @@
             {{-- contenido principal --}}
             <div class="lg:col-span-2">
                 <figure>
-                    <img class="w-full h-80  object-cover object-center" src="@if($post->image){{Storage::url($post->image->url)}} @else https://cdn.pixabay.com/photo/2020/04/13/20/48/dog-5040008_960_720.jpg @endif" alt="">
+                    @if ($post->image)
+                        <img class="w-full h-80  object-cover object-center" src="{{Storage::url($post->image->url)}}"  alt="">
+                    @else
+                        <img class="w-full h-80  object-cover object-center" src="https://cdn.pixabay.com/photo/2021/11/05/03/38/couple-6770226_1280.jpg"  alt="">
+                    @endif
                 </figure>
                 <div class="text-base text-gray-500 mt-4">
                     {!!$post->body!!}
@@ -25,7 +29,12 @@
                     @foreach ($similares as $similar)
                         <li class="mb-4">
                             <a class="flex" href="{{route('posts.show',$similar)}}">
-                                <img class="w-40 h-25 object-cover object-center" src="{{Storage::url($similar->image->url)}}" alt="">
+                                @if ($similar->image)
+                                    <img class="w-40 h-25 object-cover object-center" src="{{Storage::url($similar->image->url)}}" alt="">
+                                @else
+                                    <img class="w-40 h-25 object-cover object-center" src="https://cdn.pixabay.com/photo/2021/11/05/03/38/couple-6770226_1280.jpg" alt="">
+                                @endif
+                                
                                 <span class="ml-2 text-gray-600">{{$similar->name}}</span>                        
                             </a>
                         </li>

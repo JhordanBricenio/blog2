@@ -24,9 +24,14 @@ class PostsIndex extends Component
     {
         //Nos retorna el listado de Posts del usuario actualmente autentificado.
         //->paginate()
-        $posts=Post::where('user_id',auth()->id())
+        $posts=Post::where('status',2)
+                    ->where('name','LIKE','%'.$this->search. '%')
+                    ->latest('id')
+                    ->paginate(8);
+
+        /*$posts=Post::where('user_id',auth()->id())
                     ->where('name','LIKE','%'.$this->search. '%')//En caso de que haya texto adelante y atras del que estamos buscando
-                    ->latest('id');
+                    ->latest('id');*/
 
         //Pasamos a la vista posts-index
         return view('livewire.admin.posts-index',compact('posts'));

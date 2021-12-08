@@ -4,16 +4,16 @@
             @foreach ($posts as $post)
             {{-- Usamos directiva de blade para saber si estamos en la primer iteracion 
             y hacer una imagen mas grande ne la vista --}}
-                <article class="w-full h-80 bg-cover bg-center @if($loop->first) md:col-span-2 @endif "style="background-image: url(@if($post->image){{Storage::url($post->image->url)}} @else https://cdn.pixabay.com/photo/2020/04/13/20/48/dog-5040008_960_720.jpg @endif)">
+                <article class="w-full h-80 bg-cover bg-center @if($loop->first) md:col-span-2 @endif "style="background-image: url(@if($post->image){{Storage::url($post->image->url)}} @else https://cdn.pixabay.com/photo/2021/11/05/03/38/couple-6770226_1280.jpg @endif)">
                     <div class="w-full h-full px-8 flex flex-col justify-center">
                         <div>
-                            @foreach ($post->tags as $tagg)
-                                <a href="" class="inline-block px-3 h-6 bg-{{$tagg->color}} text-white rounded-full">{{$tagg->name}}</a>        
+                            @foreach ($post->tags as $tag)
+                                <a href="{{route('posts.tag',$tag)}}" class="inline-block px-3 h-6 bg-{{$tag->color}}-500 text-white rounded-full">{{$tag->name}}</a>        
                             @endforeach
                                        
                         </div>
 
-                        <h1 class="text-4xl text-white leading-8 font-bold">
+                        <h1 class="text-4xl text-white leading-8 font-bold mt-2">
                             <a href="{{route('posts.show',$post)}}">
                                 {{$post->name}}
                             </a>
