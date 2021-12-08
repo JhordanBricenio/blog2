@@ -36,7 +36,7 @@ class PostController extends Controller
 
     }
     public function tag(Tag $tag){
-        return $tag;
-
+        $posts= $tag->posts()->where('status',2)->latest('id')->paginate(4);
+        return view('posts.tag',compact('posts','tag'));
     }
 }
