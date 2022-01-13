@@ -24,7 +24,7 @@ class PostsIndex extends Component
     {
         //Nos retorna el listado de Posts del usuario actualmente autentificado.
         //->paginate()
-        $posts=Post::where('status',2)
+        $posts=Post::where('user_id',auth()->id())
                     ->where('name','LIKE','%'.$this->search. '%')
                     ->latest('id')
                     ->paginate(8);

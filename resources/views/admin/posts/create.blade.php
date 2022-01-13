@@ -8,8 +8,9 @@
 
 @section('content')
     <div class="card">
+        {{-- files==enviar archivos dentro del formulario --}}
         <div class="card-body">
-            {!! Form::open(['route'=>'admin.posts.store','autocomplete'=> 'off']) !!}
+            {!! Form::open(['route'=>'admin.posts.store','autocomplete'=> 'off', 'files'=>true]) !!}
            {{--  Recepsionando el id del usuario para asiganrle el post a este en un input oculto hidden --}}
                 {!! Form::hidden('user_id', auth()->user()->id) !!}
                 <div class="form-group">
@@ -43,9 +44,9 @@
                             {{$tag->name}}
                         </label>
                         
-                    @endforeach
-                    <hr>
+                    @endforeach 
                     @error('tags')
+                        <br>
                         <small class="text-danger">{{$message}}</small>
                      @enderror
                 </div>
@@ -59,10 +60,26 @@
                         {!! Form::radio('status', 2) !!}
                         Publicado
                     </label>
-                    <hr>
+                    
                     @error('status')
+                        <br>
                         <small class="text-danger">{{$message}}</small>
                      @enderror
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="image-wrapper">
+                            <img id= "picture"src="https://cdn.pixabay.com/photo/2020/05/17/19/01/pray-5183171_960_720.jpg" >
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            {!! Form::label('file', 'Imagen que se mostrará en el Post') !!}
+                            {!! Form::file('file', ['class'=>'form-control-file']) !!}
+                        </div>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto voluptates aliquid ipsam sequi quibusdam. Tempora adipisci enim soluta quidem reiciendis incidunt sit! Temporibus mollitia quia est quod totam sit similique?
+                    </div>
                 </div>
                 <div class="form-group">
                     {!! Form::label('extract', 'Extracto:') !!}
@@ -87,7 +104,18 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    <style>
+        .image-wrapper{
+            position: relative;
+            padding-bottom: 56.25%;
+        }
+        .image-wrapper img{
+            position: absolute;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 @stop
 
 @section('js')
@@ -111,5 +139,19 @@
         .catch( error => {
             console.error( error );
         } );
+
+        //Cambiar imagen dinamicamnete
+        document.getElementById("file").addEventListener('change',cambiarImagen);
+
+        function cambiarImagen(event){
+            var file=event.target.files[0];
+
+            var reader=new FileReader();
+            reader.onload=(event)=>{
+                document.getElementById("picture").setAttribute('src',event.target.result);
+            };
+            reader.readAsDataURL(file);
+
+        }
     </script>
 @endsection
