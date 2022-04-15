@@ -74,6 +74,8 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
+        $this->authorize('author',$post);
+
         $categories=Category::pluck('name','id');
         $tags=Tag::all();
         return view('admin.posts.edit' , compact('post','categories','tags'));
@@ -82,6 +84,7 @@ class PostController extends Controller
 
     public function update(PostRequest $request, Post $post)
     {
+        $this->authorize('author',$post);
         $post->update($request->all());
 
         if($request->file('file')){
@@ -99,14 +102,19 @@ class PostController extends Controller
                ]);
            }
         }
+        if($request->tags){
+            //sync metodo para editar los tags--}}
+            $post->tags()->sync($request->tags);
+
+        }
 
         return redirect()->route('admin.posts.edit', $post)->with('info','El post se actualizó con éxito');
     }
 
     public function destroy(Post $post)
     {
+        $this->authorize('author',$post);
         $post->delete();
-
-        return redirect()->route('admin.posts.index')->with('info','la etiqueta se eliminó con éxito');
+        return redirect()->route('admin.posts.index')->with('info','El post se eliminó con éxito');
     }
 }

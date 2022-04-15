@@ -22,11 +22,12 @@
                                 <a class="btn btn-primary btn-sm"href="{{route('admin.posts.edit',$post)}}">Editar</a>
                             </td>
                             <td with="10px">
-                                <form action="{{route('admin.posts.destroy',$post)}}" method="POST"></form>
-                                {{-- Utilizamos la directiva de Blade ya que el metodo delete no existe --}}
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                                <form action="{{route('admin.posts.destroy',$post)}}" method="POST">
+                                    {{-- Utilizamos la directiva de Blade ya que el metodo delete no existe --}}
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                                </form>
                             </td>
 
                         </tr>

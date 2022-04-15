@@ -18,6 +18,9 @@ class PostController extends Controller
     }
 
     public function show(Post $post){
+        //llamando a la policy para verificar si el usuario puede ver el post
+        $this->authorize('published',$post);
+
         $similares=Post::where('category_id',$post->category_id)
                             ->where('status',2)//Solo publicados
                             ->where('id','!=',$post->id)

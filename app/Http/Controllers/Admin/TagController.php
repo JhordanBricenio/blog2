@@ -105,7 +105,7 @@ class TagController extends Controller
 
         $tag->update($request->all());
 
-        return  redirect()->route('admin.tags.edit',$tag)->with('info','la etiqueta se actualizo con éxito');
+        return  redirect()->route('admin.tags.edit',$tag)->with('info','La etiqueta se actualizo con éxito');
 
     }
 
@@ -119,6 +119,6 @@ class TagController extends Controller
     {
         $tag->delete();
 
-        return redirect()->route('admin.tags.index')->with('info','la etiqueta se eliminó con éxito');
+        return redirect()->route('admin.tags.index')->with('info','La etiqueta se eliminó con éxito');
     }
 }
